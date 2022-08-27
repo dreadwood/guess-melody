@@ -1,10 +1,11 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PrivateRoute from '../private-route/private-route';
 import WelcomeScreenn from '../welcome-screen/welcome-screen';
 import WinScreen from '../win-screen/win-screen';
 
@@ -38,7 +39,13 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Result}
-          element={<WinScreen />}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <WinScreen />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.NotFound}
