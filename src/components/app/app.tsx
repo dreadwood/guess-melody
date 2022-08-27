@@ -20,38 +20,26 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
           path={AppRoute.Root}
           element={<WelcomeScreenn errorsCount={errorsCount} />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.DevArtist}
           element={<ArtistQuestionScreen />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.DevGenre}
           element={<GenreQuestionScreen />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.Login}
           element={<AuthScreen />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.Lose}
           element={<GameOverScreen />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.Result}
           element={<WinScreen />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.NotFound}
           element={<NotFoundScreen />}
