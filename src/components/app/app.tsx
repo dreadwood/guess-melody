@@ -1,10 +1,9 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {QuestionArtist, QuestionGenre, Questions} from '../../types/question';
-import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
+import {Questions} from '../../types/question';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
-import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
+import GameScreen from '../game-screen/game-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import WelcomeScreenn from '../welcome-screen/welcome-screen';
@@ -16,36 +15,12 @@ type AppScreenProps = {
 }
 
 function App({errorsCount, questions}: AppScreenProps): JSX.Element {
-  const [firstQuestion, secondQuestion] = questions;
-
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
           element={<WelcomeScreenn errorsCount={errorsCount} />}
-        />
-        <Route
-          path={AppRoute.DevArtist}
-          element={
-            <ArtistQuestionScreen
-              question={secondQuestion as QuestionArtist}
-              onAnswer={() => {
-                throw new Error('Function \'onAnswer\' isn\'t implemented.');
-              }}
-            />
-          }
-        />
-        <Route
-          path={AppRoute.DevGenre}
-          element={
-            <GenreQuestionScreen
-              question={firstQuestion as QuestionGenre}
-              onAnswer={() => {
-                throw new Error('Function \'onAnswer\' isn\'t implemented.');
-              }}
-            />
-          }
         />
         <Route
           path={AppRoute.Login}
@@ -65,6 +40,14 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
             >
               <WinScreen />
             </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoute.Game}
+          element={
+            <GameScreen
+              questions={questions}
+            />
           }
         />
         <Route
