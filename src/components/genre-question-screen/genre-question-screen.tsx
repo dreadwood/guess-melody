@@ -1,12 +1,16 @@
-import {QuestionGenre} from '../../types/question';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
 import Logo from '../logo/logo';
 
 type GenreQuestionScreenProps = {
   question: QuestionGenre
+  onAnswer: (question: QuestionGenre, answer: UserGenreQuestionAnswer) => void
 }
 
-function GenreQuestionScreen({question}: GenreQuestionScreenProps): JSX.Element {
+function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
+  const {question, onAnswer} = props;
   const {answers, genre} = question;
+  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
 
   return (
     <section className="game game--genre">
@@ -32,7 +36,13 @@ function GenreQuestionScreen({question}: GenreQuestionScreenProps): JSX.Element 
 
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
-        <form className="game__tracks">
+        <form className="game__tracks" onSubmit={
+          (evt: FormEvent) => {
+            evt.preventDefault();
+            onAnswer(question, userAnswers);
+          }
+        }
+        >
           {answers.map((answer, i) => (
             <div className="track" key={answer.src}>
               <button className="track__button track__button--play" type="button"></button>
@@ -40,7 +50,21 @@ function GenreQuestionScreen({question}: GenreQuestionScreenProps): JSX.Element 
                 <audio src={answer.src}></audio>
               </div>
               <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} />
+                <input className="game__input visually-hidden"
+                  type="checkbox"
+                  name="answer"
+                  value={`answer-${i}`}
+                  id={`answer-${i}`}
+                  checked={userAnswers[i]}
+                  onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                    const value = evt.target.checked;
+                    setUserAnswers([
+                      ...userAnswers.slice(0, i),
+                      value,
+                      ...userAnswers.slice(i + 1)
+                    ]);
+                  }}
+                />
                 <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
               </div>
             </div>

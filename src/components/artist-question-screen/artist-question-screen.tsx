@@ -1,11 +1,14 @@
-import {QuestionArtist} from '../../types/question';
+import { ChangeEvent } from 'react';
+import {QuestionArtist, UserArtistQuestionAnswer} from '../../types/question';
 import Logo from '../logo/logo';
 
 type ArtistQuestionScreenProps = {
   question: QuestionArtist
+  onAnswer: (question: QuestionArtist, answer: UserArtistQuestionAnswer) => void
 }
 
-function ArtistQuestionScreen({question}: ArtistQuestionScreenProps): JSX.Element {
+function ArtistQuestionScreen(props: ArtistQuestionScreenProps): JSX.Element {
+  const {question, onAnswer} = props;
   const {song, answers} = question;
 
   return (
@@ -43,8 +46,19 @@ function ArtistQuestionScreen({question}: ArtistQuestionScreenProps): JSX.Elemen
 
         <form className="game__artist">
           {answers.map((answer, i) => (
-            <div className="artist" key={answer.picture}>
-              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`} />
+            <div className="artist" key={answer.artist}>
+              <input className="artist__input visually-hidden"
+                type="radio"
+                name="answer"
+                value={`answer-${i}`}
+                id={`answer-${i}`}
+                onChange={
+                  (evt: ChangeEvent<HTMLInputElement>) => {
+                    evt.preventDefault();
+                    onAnswer(question, answer.artist);
+                  }
+                }
+              />
               <label className="artist__name" htmlFor={`answer-${i}`}>
                 <img className="artist__picture" src={answer.picture} alt={answer.artist} />
                 {answer.artist}
