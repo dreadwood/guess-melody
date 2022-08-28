@@ -1,5 +1,6 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {QuestionArtist, QuestionGenre, Questions} from '../../types/question';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
@@ -10,10 +11,13 @@ import WelcomeScreenn from '../welcome-screen/welcome-screen';
 import WinScreen from '../win-screen/win-screen';
 
 type AppScreenProps = {
-  errorsCount: number;
+  errorsCount: number
+  questions: Questions
 }
 
-function App({errorsCount}: AppScreenProps): JSX.Element {
+function App({errorsCount, questions}: AppScreenProps): JSX.Element {
+  const [firstQuestion, secondQuestion] = questions;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,11 +27,19 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.DevArtist}
-          element={<ArtistQuestionScreen />}
+          element={
+            <ArtistQuestionScreen
+              question={secondQuestion as QuestionArtist}
+            />
+          }
         />
         <Route
           path={AppRoute.DevGenre}
-          element={<GenreQuestionScreen />}
+          element={
+            <GenreQuestionScreen
+              question={firstQuestion as QuestionGenre}
+            />
+          }
         />
         <Route
           path={AppRoute.Login}
@@ -35,7 +47,9 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Lose}
-          element={<GameOverScreen />}
+          element={
+            <GameOverScreen />
+          }
         />
         <Route
           path={AppRoute.Result}

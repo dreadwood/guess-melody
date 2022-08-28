@@ -1,5 +1,5 @@
 type WelcomeScreenProps = {
-  errorsCount: number;
+  errorsCount: number
 }
 
 function WelcomeScreen({errorsCount}: WelcomeScreenProps) {
