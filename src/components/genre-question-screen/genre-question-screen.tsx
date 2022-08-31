@@ -1,5 +1,6 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
+import AudioPlayer from '../audio-player/audio-player';
 import Logo from '../logo/logo';
 
 type GenreQuestionScreenProps = {
@@ -45,10 +46,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
         >
           {answers.map((answer, i) => (
             <div className="track" key={answer.src}>
-              <button className="track__button track__button--play" type="button"></button>
-              <div className="track__status">
-                <audio src={answer.src}></audio>
-              </div>
+              <AudioPlayer src={answer.src} />
               <div className="game__answer">
                 <input className="game__input visually-hidden"
                   type="checkbox"

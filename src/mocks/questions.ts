@@ -10,13 +10,13 @@ export const questions: Questions = [
       src: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg',
       genre: 'rock',
     }, {
-      src: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg',
+      src: 'https://9.react.pages.academy/static/music/Manic_No_Depression.mp3',
       genre: 'blues',
     }, {
-      src: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg',
+      src: 'https://9.react.pages.academy/static/music/Say_Yeah.mp3',
       genre: 'jazz',
     }, {
-      src: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg',
+      src: 'https://9.react.pages.academy/static/music/Kurt.mp3',
       genre: 'rock',
     }],
   }, {
