@@ -1,14 +1,17 @@
 import {useEffect, useRef, useState} from 'react';
 
 type AudioPlayerProps = {
-  src: string;
+  isPlaying: boolean
+  src: string
+  onPlayButtonClick: () => void
 }
 
-function AudioPlayer({src}: AudioPlayerProps): JSX.Element {
+function AudioPlayer({isPlaying, src, onPlayButtonClick}: AudioPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
   // A flag indicating whether the effect has been executed or not
   // because of Strict mode
   const isExecuted = useRef(false);
@@ -41,7 +44,7 @@ function AudioPlayer({src}: AudioPlayerProps): JSX.Element {
         type="button"
         disabled={isLoading}
         title={isLoading ? 'Аудио еще не загрузилось' : ''}
-        onClick={() => setIsPlaying(!isPlaying)}
+        onClick={onPlayButtonClick}
         style={isLoading ? {
           cursor: 'not-allowed',
         } : {}}

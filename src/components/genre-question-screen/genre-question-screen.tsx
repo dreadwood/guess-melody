@@ -12,6 +12,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
   const {question, onAnswer} = props;
   const {answers, genre} = question;
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+  const [activePlayer, setActivePlayer] = useState(-1);
 
   return (
     <section className="game game--genre">
@@ -46,7 +47,11 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
         >
           {answers.map((answer, i) => (
             <div className="track" key={answer.src}>
-              <AudioPlayer src={answer.src} />
+              <AudioPlayer
+                isPlaying={activePlayer === i}
+                src={answer.src}
+                onPlayButtonClick = {() => setActivePlayer(activePlayer === i ? -1 : i)}
+              />
               <div className="game__answer">
                 <input className="game__input visually-hidden"
                   type="checkbox"
