@@ -1,9 +1,14 @@
 import {useState} from 'react';
 import {Navigate} from 'react-router-dom';
 import {AppRoute, FIRST_GAME_STEP, GameType} from '../../const';
+import withAudioPlayer from '../../hooks/with-audio-player/with-audio-player';
 import {QuestionArtist, QuestionGenre, Questions} from '../../types/question';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
+
+
+const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 
 type GameScreenProps = {
   questions: Questions
@@ -20,14 +25,16 @@ function GameScreen({questions}: GameScreenProps): JSX.Element {
   switch (question.type) {
     case GameType.Artist:
       return (
-        <ArtistQuestionScreen
+        <ArtistQuestionScreenWrapped
+          key={step}
           question={question as QuestionArtist}
           onAnswer={() => setStep((prevStep) => prevStep + 1)}
         />
       );
     case GameType.Genre:
       return (
-        <GenreQuestionScreen
+        <GenreQuestionScreenWrapped
+          key={step}
           question={question as QuestionGenre}
           onAnswer={() => setStep((prevStep) => prevStep + 1)}
         />

@@ -8,7 +8,6 @@ type AudioPlayerProps = {
 
 function AudioPlayer({isPlaying, src, onPlayButtonClick}: AudioPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
-  // const [isPlaying, setIsPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 

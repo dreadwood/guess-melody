@@ -1,18 +1,17 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
-import AudioPlayer from '../audio-player/audio-player';
 import Logo from '../logo/logo';
 
 type GenreQuestionScreenProps = {
   question: QuestionGenre
   onAnswer: (question: QuestionGenre, answer: UserGenreQuestionAnswer) => void
+  renderPlayer: (src: string, id: number) => JSX.Element
 }
 
 function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
-  const {question, onAnswer} = props;
+  const {question, onAnswer, renderPlayer} = props;
   const {answers, genre} = question;
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
-  const [activePlayer, setActivePlayer] = useState(-1);
 
   return (
     <section className="game game--genre">
@@ -47,11 +46,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
         >
           {answers.map((answer, i) => (
             <div className="track" key={answer.src}>
-              <AudioPlayer
-                isPlaying={activePlayer === i}
-                src={answer.src}
-                onPlayButtonClick = {() => setActivePlayer(activePlayer === i ? -1 : i)}
-              />
+              {renderPlayer(answer.src, i)}
               <div className="game__answer">
                 <input className="game__input visually-hidden"
                   type="checkbox"
