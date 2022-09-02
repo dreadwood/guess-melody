@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Navigate} from 'react-router-dom';
 import {AppRoute, FIRST_GAME_STEP, GameType} from '../../const';
-import withAudioPlayer from '../../hooks/with-audio-player/with-audio-player';
+import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player';
 import {QuestionArtist, QuestionGenre, Questions} from '../../types/question';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
