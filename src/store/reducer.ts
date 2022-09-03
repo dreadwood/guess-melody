@@ -15,6 +15,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.step += STEP_COUNT;
     })
     .addCase(resetGame, (state) => {
-      state = {...initialState};
+      state.mistakes = initialState.mistakes;
+      state.step = initialState.step;
     });
 });
