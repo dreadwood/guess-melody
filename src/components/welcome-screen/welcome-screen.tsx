@@ -1,5 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {resetGame} from '../../store/action';
 
 type WelcomeScreenProps = {
   errorsCount: number
@@ -7,6 +9,7 @@ type WelcomeScreenProps = {
 
 function WelcomeScreen({errorsCount}: WelcomeScreenProps) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <section className="welcome">
@@ -14,7 +17,10 @@ function WelcomeScreen({errorsCount}: WelcomeScreenProps) {
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
       </div>
       <button className="welcome__button"
-        onClick={() => navigate(AppRoute.Game)}
+        onClick={() => {
+          dispatch(resetGame());
+          navigate(AppRoute.Game);
+        }}
       >
         <span className="visually-hidden">Начать игру</span>
       </button>
