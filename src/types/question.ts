@@ -9,13 +9,13 @@ export type ArtistAnswer = {
 }
 
 export type QuestionGenre = {
-  type: string
+  type: 'genre'
   genre: string
   answers: GenreAnswer[],
 }
 
 export type QuestionArtist = {
-  type: string
+  type: 'artist'
   song: {
     artist: string
     src: string
@@ -30,3 +30,5 @@ export type Questions = Question[];
 export type UserGenreQuestionAnswer = readonly boolean[];
 
 export type UserArtistQuestionAnswer = string;
+
+export type UserAnswer = UserArtistQuestionAnswer | UserGenreQuestionAnswer;
