@@ -1,6 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, MAX_MISTAKE_COUNT} from '../../const';
-// import {Questions} from '../../types/question';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 import GameScreen from '../game-screen/game-screen';
@@ -24,9 +23,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Lose}
-          element={
-            <GameOverScreen />
-          }
+          element={<GameOverScreen />}
         />
         <Route
           path={AppRoute.Result}
@@ -40,9 +37,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Game}
-          element={
-            <GameScreen />
-          }
+          element={<GameScreen />}
         />
         <Route
           path={AppRoute.NotFound}
