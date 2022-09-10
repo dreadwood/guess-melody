@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {FIRST_GAME_STEP} from '../const';
+import {AuthorizationStatus, FIRST_GAME_STEP} from '../const';
 import {isAnswerCorrect} from '../game';
 import {questions} from '../mocks/questions';
-import {checkUserAnswer, incrementStep, loadQuestions, resetGame} from './action';
+import {checkUserAnswer, incrementStep, loadQuestions, requireAuthorization, resetGame} from './action';
 
 
 const STEP_COUNT = 1;
@@ -12,6 +12,7 @@ const initialState = {
   step: FIRST_GAME_STEP,
   mistakes: 0,
   questions,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -25,6 +26,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadQuestions, (state, action) => {
       state.questions = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     })
     .addCase(resetGame, (state) => {
       state.step = initialState.step;
