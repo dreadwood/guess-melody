@@ -12,6 +12,7 @@ type InitialState = {
   mistakes: number
   questions: Questions
   authorizationStatus: AuthorizationStatus
+  isDataLoaded: boolean
   error: string
 }
 
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   mistakes: 0,
   questions: [],
   authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
   error: '',
 };
 
@@ -37,6 +39,7 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadQuestions, (state, action) => {
       state.questions = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
