@@ -24,3 +24,9 @@ export enum GameType {
   Artist = 'artist',
   Genre = 'genre',
 }
+
+export enum ApiRoute {
+  Questions = '/questions',
+  Login = '/login',
+  Logout = '/logout',
+}
