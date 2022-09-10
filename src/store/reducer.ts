@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {FIRST_GAME_STEP} from '../const';
 import {isAnswerCorrect} from '../game';
 import {questions} from '../mocks/questions';
-import {checkUserAnswer, incrementStep, resetGame} from './action';
+import {checkUserAnswer, incrementStep, loadQuestions, resetGame} from './action';
 
 
 const STEP_COUNT = 1;
@@ -22,6 +22,9 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(checkUserAnswer, (state, action) => {
       const {question, userAnswer} = action.payload;
       state.mistakes += isAnswerCorrect(question, userAnswer) ? 0 : MISTAKE_COUNT;
+    })
+    .addCase(loadQuestions, (state, action) => {
+      state.questions = action.payload;
     })
     .addCase(resetGame, (state) => {
       state.step = initialState.step;
