@@ -8,8 +8,6 @@ export const resetGame = createAction('game/resetGame');
 
 export const checkUserAnswer = createAction<{question: Question, userAnswer: UserAnswer}>('game/checkUserAnswer');
 
-export const setError = createAction<string>('game/setError');
-
 export const loadQuestions = createAction<Questions>('data/loadQuestions');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

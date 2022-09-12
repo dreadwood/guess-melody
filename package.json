@@ -11,6 +11,7 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
     "reselect": "^4.0.0"
   },
   "scripts": {
@@ -29,8 +30,14 @@
     ],
     "rules": {
       "indent": "off",
-      "@typescript-eslint/indent": ["error", 2],
-      "object-curly-spacing": ["error", "never"]
+      "@typescript-eslint/indent": [
+        "error",
+        2
+      ],
+      "object-curly-spacing": [
+        "error",
+        "never"
+      ]
     }
   },
   "browserslist": {

@@ -1,29 +1,19 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {store} from '.';
-import {ApiRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 import {errorHandle} from '../services/error-handle';
 import {removeToken, saveToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
 import {Questions} from '../types/question';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {loadQuestions, redirectToRoute, requireAuthorization, setError} from './action';
+import {loadQuestions, redirectToRoute, requireAuthorization} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
   state: State
   extra: AxiosInstance
 }
-
-export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
-  () => {
-    setTimeout(() => {
-      store.dispatch(setError(''));
-    }, TIMEOUT_SHOW_ERROR);
-  }
-);
 
 export const fetchQuestionAction = createAsyncThunk<void, undefined, ApiConfigAction>(
   'data/fetchQuestion',
