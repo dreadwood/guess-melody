@@ -1,10 +1,12 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
+import browserHistory from '../../browser-history';
 import {AppRoute, MAX_MISTAKE_COUNT} from '../../const';
 import {isCheckedAuth} from '../../game';
 import {useAppSelector} from '../../hooks';
 import AuthScreen from '../auth-screen/auth-screen';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 import GameScreen from '../game-screen/game-screen';
+import HistoryRoute from '../history-route/history-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
@@ -22,7 +24,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRoute history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -55,7 +57,7 @@ function App(): JSX.Element {
           element={<NotFoundScreen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRoute>
   );
 }
 
