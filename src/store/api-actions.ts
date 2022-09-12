@@ -1,14 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {store} from '.';
-import {ApiRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import {ApiRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {errorHandle} from '../services/error-handle';
 import {removeToken, saveToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
 import {Questions} from '../types/question';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {loadQuestions, requireAuthorization, setError} from './action';
+import {loadQuestions, redirectToRoute, requireAuthorization, setError} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -57,6 +57,7 @@ export const loginAction = createAsyncThunk<void, AuthData, ApiConfigAction>(
       const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(redirectToRoute(AppRoute.Result));
     } catch (error) {
       errorHandle(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
